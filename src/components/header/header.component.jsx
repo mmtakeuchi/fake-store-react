@@ -10,7 +10,9 @@ const Header = () => {
         <PaperPlane className="logo" />
       </Link>
       <div className="options-container">
-        <p className="option">Shop</p>
+        <Link to="shop" className="option">
+          Shop
+        </Link>
         <p className="option">Sign In</p>
       </div>
     </div>

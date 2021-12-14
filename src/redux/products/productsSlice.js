@@ -12,6 +12,16 @@ export const productsSlice = createSlice({
   reducers: {
     getProducts,
   },
+  extraReducers: (builder) => {
+    builder
+      .addCase(getProducts.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(getProducts.fulfilled, (state, { payload }) => {
+        state.isLoading = false;
+        state.products = payload;
+      });
+  },
 });
 
 export default productsSlice.reducer;
