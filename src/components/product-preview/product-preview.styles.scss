@@ -1,4 +1,115 @@
-.product {
+.product-preview {
   flex: 1;
-  margin: 1em;
+  min-width: 25%;
+  height: 20em;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 0 1em;
+  border: 1px solid rgb(229, 232, 235);
+  border-radius: 10px;
+
+  &_image {
+    width: 100%;
+    height: 90%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    img {
+      width: 90%;
+      height: 90%;
+      object-fit: contain;
+      object-position: center;
+      cursor: pointer;
+    }
+  }
+
+  &_image:hover {
+    cursor: pointer;
+
+    img {
+      transform: scale(1.05);
+      transition: transform 0.5s cubic-bezier(0.25, 0.45, 0.45, 0.95);
+    }
+  }
+
+  &_footer {
+    width: 80%;
+    height: 10%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 1.1rem;
+
+    p {
+      margin: 0.1em 0;
+    }
+
+    .product-preview_title {
+      width: 70%;
+      font-weight: 600;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .product-preview_price {
+      width: 30%;
+      font-weight: 400;
+    }
+  }
+}
+
+.product-preview:hover {
+  box-shadow: rgb(4 17 29 / 25%) 0px 0px 8px 0px;
+  transition: all 0.1s ease 0s;
+}
+
+@media screen and (max-width: 800px) {
+  .product-preview {
+    min-width: 33%;
+    height: 25em;
+
+    &_image {
+      height: 50%;
+    }
+
+    &_footer {
+      height: 50%;
+      width: 100%;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+
+      .product-preview_title {
+        width: 100%;
+        font-size: 1rem;
+        margin: auto;
+        white-space: normal;
+        overflow: hidden;
+        text-overflow: clip;
+        // white-space: nowrap;
+      }
+
+      .product-preview_price {
+        width: 100%;
+        align-items: flex-end;
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 400px) {
+  .product-preview {
+    min-width: 50%;
+
+    &_image {
+      height: 60%;
+    }
+
+    &_footer {
+      height: 40%;
+    }
+  }
 }

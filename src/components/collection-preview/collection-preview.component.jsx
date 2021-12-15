@@ -1,31 +1,25 @@
-import React, { useEffect } from "react";
-import { useParams } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
-import { getCategoryProducts } from "../../redux/categories/categoryActions";
-import ProductCard from "../product-card/product-card.component";
+import React from "react";
+import { useNavigate } from "react-router-dom";
+import ProductPreview from "../product-preview/product-preview.component";
 import "./collection-preview.styles.scss";
 
-const CollectionPreview = () => {
-  const dispatch = useDispatch();
-  const params = useParams();
-  const { isLoading, categories } = useSelector((state) => state.categories);
-  console.log("preview", isLoading, categories);
-
-  useEffect(
-    () => dispatch(getCategoryProducts(params.categoryId)),
-    [dispatch, params]
-  );
-
-  const renderCategoryProducts =
-    !isLoading &&
-    categories?.map((product) => (
-      <ProductCard key={product.id} product={product} />
-    ));
+const CollectionPreview = ({ title, category }) => {
+  const navigate = useNavigate();
 
   return (
-    <div>
-      <h2>{params.categoryId.toUpperCase()}</h2>
-      <div className="products-container">{renderCategoryProducts}</div>
+    <div className="collection-preview">
+      <h2
+        className="preview-title"
+        onClick={() => navigate(`/categories/${title}`)}
+      >
+        {title.toUpperCase()}
+      </h2>
+
+      <div className="preview-products">
+        {category.map((product) => (
+          <ProductPreview key={product.id} product={product} />
+        ))}
+      </div>
     </div>
   );
 };

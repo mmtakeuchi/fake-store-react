@@ -2,6 +2,7 @@ import React from "react";
 import "./product-card.styles.scss";
 
 const ProductCard = ({ product }) => {
+  console.log(product);
   return (
     <div className="product-card">
       <div className="product-image">
@@ -9,7 +10,7 @@ const ProductCard = ({ product }) => {
       </div>
       <div className="product-details">
         <h2 className="product-title">{product.title}</h2>
-        <div className="product-price">Price: ${product.price}</div>
+        <div className="product-price">${product.price.toFixed(2)}</div>
       </div>
     </div>
   );

@@ -1,5 +1,9 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { getCategories, getCategoryProducts } from "./categoryActions";
+import {
+  getCategories,
+  getCategoryProducts,
+  selectCategory,
+} from "./categoryActions";
 
 const initialState = {
   isLoading: false,
@@ -26,6 +30,14 @@ export const categoriesSlice = createSlice({
         state.isLoading = true;
       })
       .addCase(getCategoryProducts.fulfilled, (state, { payload }) => {
+        state.isLoading = false;
+        state.categories = payload;
+      })
+      .addCase(selectCategory.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(selectCategory.fulfilled, (state, { payload }) => {
+        console.log(payload);
         state.isLoading = false;
         state.categories = payload;
       });

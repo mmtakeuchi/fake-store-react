@@ -1,4 +1,23 @@
-.products-container {
+.collection-preview {
   display: flex;
-  align-items: center;
+  flex-direction: column;
+  margin-bottom: 30px;
+  padding: 0 2em;
+
+  .preview-title {
+    cursor: pointer;
+    font-size: 28px;
+    margin-bottom: 25px;
+    text-align: left;
+    padding: 0 1em;
+  }
+
+  .preview-products {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    overflow: hidden;
+    padding: 0.25em;
+  }
 }
