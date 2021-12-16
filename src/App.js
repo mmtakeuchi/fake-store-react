@@ -17,6 +17,9 @@ const App = () => {
           <Route path="categories/:categoryId" element={<CollectionPage />} />
         </Routes>
       </div>
+      <a href="https://icons8.com/icon/rKDsLEslOCMJ/luggage-cart">
+        Luggage Cart icon by Icons8
+      </a>
     </div>
   );
 };

@@ -7,7 +7,6 @@ const ShopNavBar = ({ setFilter }) => {
   const dispatch = useDispatch();
   const elRefs = useRef([]);
   const [active, setActive] = useState("SHOW ALL");
-  console.log(active);
   const { isLoading, categories } = useSelector((state) => state.categories);
 
   const handleActive = (e) => {

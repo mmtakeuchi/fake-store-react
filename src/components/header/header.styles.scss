@@ -20,6 +20,10 @@
       text-decoration: none;
       color: black;
       cursor: pointer;
+
+      &.cart-icon {
+        width: 1.6em;
+      }
     }
   }
 }
