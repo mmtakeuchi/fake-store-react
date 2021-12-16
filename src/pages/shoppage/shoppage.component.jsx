@@ -1,23 +1,30 @@
 import React, { useState, useEffect } from "react";
-import { Routes, Route } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { getProducts } from "../../redux/products/productActions";
-import CollectionOverview from "../../components/collection-overview/collection-overview.component.";
+import ShopNavBar from "../../components/shop-navbar/shop-navbar.component";
 import ProductCard from "../../components/product-card/product-card.component";
 import "./shoppage.styles.scss";
 
-const Shoppage = (props) => {
+const Shoppage = () => {
   const dispatch = useDispatch();
   const [loading, setLoading] = useState(true);
+  const [filter, setFilter] = useState("SHOW ALL");
   const { isLoading, products } = useSelector((state) => state.products);
+  const [filteredProducts, setFilteredPRoducts] = useState();
 
   const renderProducts = () => {
     return (
-      !loading &&
+      !isLoading &&
       products?.map((product) => (
         <ProductCard key={product.id} product={product} />
       ))
     );
+  };
+
+  const renderFilteredProducts = () => {
+    return filteredProducts?.map((filteredProduct) => (
+      <ProductCard key={filteredProduct.id} product={filteredProduct} />
+    ));
   };
 
   useEffect(() => {
@@ -25,13 +32,25 @@ const Shoppage = (props) => {
     setLoading(false);
   }, [dispatch, loading]);
 
+  useEffect(() => {
+    if (filter !== "SHOW ALL") {
+      setFilteredPRoducts(
+        products?.filter((product) =>
+          product.category.includes(filter.toLowerCase())
+        )
+      );
+    } else {
+      setFilteredPRoducts(products);
+    }
+  }, [filter, products]);
+
   return (
     <div className="shop-container">
       {!loading && (
-        // <Routes>
-        //   <Route index element={<CollectionOverview />} />
-        // </Routes>
-        <div className="products-container">{renderProducts()}</div>
+        <>
+          <ShopNavBar setFilter={setFilter} />
+          <div className="products-container">{renderFilteredProducts()}</div>
+        </>
       )}
     </div>
   );

@@ -1,5 +1,6 @@
 import axios from "axios";
 import { createAsyncThunk } from "@reduxjs/toolkit";
+import { v4 as uuidv4 } from "uuid";
 
 const BASE_URL = "https://fakestoreapi.com";
 
@@ -20,7 +21,9 @@ export const getCategories = createAsyncThunk(
 
     try {
       if (categories) {
-        return categories;
+        return categories.map((category) => {
+          return { id: uuidv4(), title: category };
+        });
       }
     } catch (error) {
       console.log("Error", error);

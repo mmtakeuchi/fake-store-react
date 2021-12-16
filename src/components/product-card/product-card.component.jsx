@@ -2,7 +2,6 @@ import React from "react";
 import "./product-card.styles.scss";
 
 const ProductCard = ({ product }) => {
-  console.log(product);
   return (
     <div className="product-card">
       <div className="product-image">

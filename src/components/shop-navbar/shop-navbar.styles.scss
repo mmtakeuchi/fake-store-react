@@ -1,0 +1,38 @@
+.shop-navbar {
+  display: flex;
+  justify-content: space-evenly;
+  width: 70%;
+  margin: 0 auto;
+
+  .category-filter {
+    display: inline-block;
+    position: relative;
+    font-weight: 600;
+    color: black;
+    cursor: pointer;
+
+    &_active {
+      font-weight: 600;
+      text-decoration: underline #0087ca 2px;
+      text-underline-offset: 0.75em;
+    }
+  }
+
+  .category-filter:after {
+    content: "";
+    position: absolute;
+    width: 100%;
+    transform: scaleX(0);
+    height: 2px;
+    top: 1.75em;
+    left: 0;
+    background-color: #00a5f8;
+    transform-origin: bottom right;
+    transition: transform 0.25s ease-out;
+  }
+
+  .category-filter:hover:after {
+    transform: scaleX(1);
+    transform-origin: bottom left;
+  }
+}

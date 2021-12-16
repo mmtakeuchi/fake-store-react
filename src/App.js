@@ -10,7 +10,6 @@ const App = () => {
   return (
     <div className="App">
       <Header />
-      <h1>Fake Store</h1>
       <div className="main-container">
         <Routes>
           <Route path="/" element={<HomePage />} />
