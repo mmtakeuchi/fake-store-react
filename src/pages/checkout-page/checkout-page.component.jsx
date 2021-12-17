@@ -22,7 +22,7 @@ const CheckoutPage = (props) => {
   );
 
   const checkout = (total) => {
-    alert(`Thank you for your purchase! Your total was ${total}`);
+    alert(`Thank you for your purchase! Your total was $${total.toFixed(2)}.`);
     dispatch(clearCart());
     navigate("/shop");
   };

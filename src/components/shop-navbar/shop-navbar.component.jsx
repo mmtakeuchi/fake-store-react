@@ -1,5 +1,6 @@
-import React, { useState, useRef, createRef } from "react";
+import React, { useState, useEffect, useRef, createRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { getCategories } from "../../redux/categories/categoryActions";
 import "./shop-navbar.styles.scss";
 
 const ShopNavBar = ({ setFilter }) => {
@@ -7,6 +8,7 @@ const ShopNavBar = ({ setFilter }) => {
   const elRefs = useRef([]);
   const [active, setActive] = useState("SHOW ALL");
   const { isLoading, categories } = useSelector((state) => state.categories);
+  console.log(categories);
 
   const handleActive = (e) => {
     const dataId = e.target.dataset.index;
@@ -22,20 +24,25 @@ const ShopNavBar = ({ setFilter }) => {
     );
 
   const renderCategories = () => {
-    return categories?.map((category, i) => (
-      <p
-        className={`category-filter${
-          active === category.title.toUpperCase() ? "_active" : ""
-        }`}
-        key={category.id}
-        data-index={i + 1}
-        ref={elRefs.current[i + 1]}
-        onClick={handleActive}
-      >
-        {category.title.toUpperCase()}
-      </p>
-    ));
+    return (
+      !isLoading &&
+      categories?.map((category, i) => (
+        <p
+          className={`category-filter${
+            active === category.title.toUpperCase() ? "_active" : ""
+          }`}
+          key={category.id}
+          data-index={i + 1}
+          ref={elRefs.current[i + 1]}
+          onClick={handleActive}
+        >
+          {category.title.toUpperCase()}
+        </p>
+      ))
+    );
   };
+
+  useEffect(() => dispatch(getCategories()), []);
 
   return (
     <div className="shop-navbar">

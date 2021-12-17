@@ -1,9 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
-import {
-  getCategories,
-  getCategoryProducts,
-  selectCategory,
-} from "./categoryActions";
+import { getCategories } from "./categoryActions";
+import { addCategoryImage } from "./categoryUtil";
 
 const initialState = {
   isLoading: false,
@@ -15,7 +12,6 @@ export const categoriesSlice = createSlice({
   initialState,
   reducers: {
     getCategories,
-    getCategoryProducts,
   },
   extraReducers: (builder) => {
     builder
@@ -24,22 +20,7 @@ export const categoriesSlice = createSlice({
       })
       .addCase(getCategories.fulfilled, (state, { payload }) => {
         state.isLoading = false;
-        state.categories = payload;
-      })
-      .addCase(getCategoryProducts.pending, (state) => {
-        state.isLoading = true;
-      })
-      .addCase(getCategoryProducts.fulfilled, (state, { payload }) => {
-        state.isLoading = false;
-        state.categories = payload;
-      })
-      .addCase(selectCategory.pending, (state) => {
-        state.isLoading = true;
-      })
-      .addCase(selectCategory.fulfilled, (state, { payload }) => {
-        console.log(payload);
-        state.isLoading = false;
-        state.categories = payload;
+        state.categories = addCategoryImage(payload);
       });
   },
 });

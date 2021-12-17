@@ -35,9 +35,7 @@ const Shoppage = () => {
   useEffect(() => {
     if (filter !== "SHOW ALL") {
       setFilteredPRoducts(
-        products?.filter((product) =>
-          product.category.includes(filter.toLowerCase())
-        )
+        products?.filter((product) => product.category == filter.toLowerCase())
       );
     } else {
       setFilteredPRoducts(products);
