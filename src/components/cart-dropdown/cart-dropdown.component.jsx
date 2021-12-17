@@ -1,16 +1,33 @@
 import React from "react";
-import { useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { toggleCart } from "../../redux/cart/cartActions";
+import CartItem from "../cart-item/cart-item.component";
 import "./cart-dropdown.styles.scss";
 
 const CartDropdown = (props) => {
-  const state = useSelector((state) => state.cart);
-  console.log(state);
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const cart = useSelector((state) => state.cart);
+
   return (
-    <div>
-      <img
-        src="https://img.icons8.com/external-vitaliy-gorbachev-flat-vitaly-gorbachev/58/000000/external-luggage-cart-vacation-vitaliy-gorbachev-flat-vitaly-gorbachev.png"
-        className="option cart-icon"
-      />
+    <div className="cart-dropdown">
+      <div className="cart-dropdown_items-container">
+        {cart.cartItems.length ? (
+          cart.cartItems?.map((item) => <CartItem key={item.id} item={item} />)
+        ) : (
+          <div>Your cart is empty</div>
+        )}
+      </div>
+      <button
+        className="cart-btn"
+        onClick={() => {
+          navigate("checkout");
+          dispatch(toggleCart());
+        }}
+      >
+        Clear
+      </button>
     </div>
   );
 };

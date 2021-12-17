@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { Link } from "react-router-dom";
 import { getCategoryProducts } from "../../redux/categories/categoryActions";
 import CollectionPreview from "../collection-preview/collection-preview.component";
 import "./collection-overview.styles.scss";

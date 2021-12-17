@@ -1,0 +1,48 @@
+.checkout-item {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  min-height: 5em;
+  border-bottom: 1px solid darkgrey;
+  padding: 0.5em 0;
+  font-size: 1.1rem;
+
+  &_image {
+    flex: 15%;
+    height: 100%;
+    padding: 0 2em;
+
+    img {
+      width: 50%;
+      height: 100%;
+    }
+  }
+
+  &_title {
+    flex: 23%;
+  }
+
+  &_details {
+    display: flex;
+    justify-content: center;
+    flex: 20%;
+
+    span {
+      margin: 0 0.25em;
+    }
+
+    div {
+      cursor: pointer;
+    }
+  }
+
+  &_price {
+    flex: 23%;
+  }
+
+  .remove-item-btn {
+    flex: 5%;
+    padding-left: 0.1em;
+    cursor: pointer;
+  }
+}

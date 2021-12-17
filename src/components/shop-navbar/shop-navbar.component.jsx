@@ -7,7 +7,7 @@ const ShopNavBar = ({ setFilter }) => {
   const dispatch = useDispatch();
   const elRefs = useRef([]);
   const [active, setActive] = useState("SHOW ALL");
-  const { isLoading, categories } = useSelector((state) => state.categories);
+  const { categories } = useSelector((state) => state.categories);
 
   const handleActive = (e) => {
     const dataId = e.target.dataset.index;
