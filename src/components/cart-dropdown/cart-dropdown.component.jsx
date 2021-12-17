@@ -16,7 +16,9 @@ const CartDropdown = (props) => {
         {cart.cartItems.length ? (
           cart.cartItems?.map((item) => <CartItem key={item.id} item={item} />)
         ) : (
-          <div>Your cart is empty</div>
+          <div className="cart-dropdown_empty-container">
+            Your cart is empty
+          </div>
         )}
       </div>
       <button
@@ -26,7 +28,7 @@ const CartDropdown = (props) => {
           dispatch(toggleCart());
         }}
       >
-        Clear
+        Checkout
       </button>
     </div>
   );

@@ -1,13 +1,12 @@
-import React, { useState, useEffect, useRef, createRef } from "react";
+import React, { useState, useRef, createRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import "./shop-navbar.styles.scss";
-import { getCategories } from "../../redux/categories/categoryActions";
 
 const ShopNavBar = ({ setFilter }) => {
   const dispatch = useDispatch();
   const elRefs = useRef([]);
   const [active, setActive] = useState("SHOW ALL");
-  const { categories } = useSelector((state) => state.categories);
+  const { isLoading, categories } = useSelector((state) => state.categories);
 
   const handleActive = (e) => {
     const dataId = e.target.dataset.index;
@@ -16,9 +15,11 @@ const ShopNavBar = ({ setFilter }) => {
     setFilter(elRefs.current[dataId].current.textContent);
   };
 
-  elRefs.current = ["Show All", ...categories]?.map(
-    (category, i) => elRefs.current[i] ?? createRef()
-  );
+  elRefs.current =
+    !isLoading &&
+    ["Show All", ...categories]?.map(
+      (category, i) => elRefs.current[i] ?? createRef()
+    );
 
   const renderCategories = () => {
     return categories?.map((category, i) => (
@@ -35,10 +36,6 @@ const ShopNavBar = ({ setFilter }) => {
       </p>
     ));
   };
-
-  useEffect(() => {
-    dispatch(getCategories());
-  }, [dispatch]);
 
   return (
     <div className="shop-navbar">

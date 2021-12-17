@@ -1,16 +1,30 @@
 import React from "react";
-import { useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { clearCart } from "../../redux/cart/cartActions";
 import CheckoutItem from "../../components/checkout-item/checkout-item.component";
 import "./checkout-page.styles.scss";
 
 const CheckoutPage = (props) => {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
   const cart = useSelector((state) => state.cart);
-  console.log(cart);
 
   const renderCheckoutItems = () => {
     return cart?.cartItems?.map((item) => (
       <CheckoutItem key={item.id} item={item} />
     ));
+  };
+
+  const calculateTotal = cart?.cartItems?.reduce(
+    (acc, el) => acc + el.quantity * el.price,
+    0
+  );
+
+  const checkout = (total) => {
+    alert(`Thank you for your purchase! Your total was ${total}`);
+    dispatch(clearCart());
+    navigate("/shop");
   };
 
   return (
@@ -33,10 +47,13 @@ const CheckoutPage = (props) => {
         </div>
       </div>
       {renderCheckoutItems()}
-      <div className="checkout-container_total">
-        TOTAL: $
-        {cart?.cartItems?.reduce((acc, el) => acc + el.quantity * el.price, 0)}
-      </div>
+      <div className="checkout-container_total">TOTAL: ${calculateTotal}</div>
+      <button
+        className="checkout-container_btn"
+        onClick={() => checkout(calculateTotal)}
+      >
+        Checkout
+      </button>
     </div>
   );
 };

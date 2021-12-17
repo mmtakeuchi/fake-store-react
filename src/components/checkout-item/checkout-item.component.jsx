@@ -1,6 +1,10 @@
 import React from "react";
 import { useDispatch } from "react-redux";
-import { addToCart, removeFromCart } from "../../redux/cart/cartActions";
+import {
+  addToCart,
+  removeFromCart,
+  clearItemInCart,
+} from "../../redux/cart/cartActions";
 import "./checkout-item.styles.scss";
 
 const CheckoutItem = ({ item }) => {
@@ -19,7 +23,12 @@ const CheckoutItem = ({ item }) => {
         <div onClick={() => dispatch(addToCart(item))}>&#10095;</div>
       </span>
       <p className="checkout-item_price">${price.toFixed(2)}</p>
-      <div className="remove-item-btn">&#10005;</div>
+      <div
+        className="remove-item-btn"
+        onClick={() => dispatch(clearItemInCart(item))}
+      >
+        &#10005;
+      </div>
     </div>
   );
 };

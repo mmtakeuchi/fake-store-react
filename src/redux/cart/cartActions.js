@@ -33,6 +33,20 @@ export const removeFromCart = createAsyncThunk(
   }
 );
 
+export const clearItemInCart = createAsyncThunk(
+  "cart/clearItemInCart",
+  async (item) => {
+    try {
+      if (item) {
+        return item;
+      }
+    } catch (error) {
+      console.log("Error", error);
+      return cartError(error);
+    }
+  }
+);
+
 export const clearCart = createAsyncThunk("cart/clearCart", async (cart) => {
   try {
     if (cart && cart.cartItems.length) {

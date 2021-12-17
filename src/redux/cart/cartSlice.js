@@ -3,9 +3,10 @@ import {
   toggleCart,
   addToCart,
   removeFromCart,
+  clearItemInCart,
   clearCart,
 } from "./cartActions";
-import { addItemToCart, removeItemInCart } from "./cartUtil";
+import { addItemToCart, removeItemInCart, clearCartItem } from "./cartUtil";
 
 const initialState = {
   isLoading: false,
@@ -20,6 +21,7 @@ export const cartSlice = createSlice({
     toggleCart,
     addToCart,
     removeFromCart,
+    clearItemInCart,
     clearCart,
   },
   extraReducers: (builder) => {
@@ -45,6 +47,13 @@ export const cartSlice = createSlice({
       .addCase(removeFromCart.fulfilled, (state, { payload }) => {
         state.isLoading = false;
         state.cartItems = removeItemInCart(state.cartItems, payload);
+      })
+      .addCase(clearItemInCart.pending, ({ isLoading }) => {
+        isLoading = true;
+      })
+      .addCase(clearItemInCart.fulfilled, (state, { payload }) => {
+        state.isLoading = false;
+        state.cartItems = clearCartItem(state.cartItems, payload);
       })
       .addCase(clearCart.pending, ({ isLoading }) => {
         isLoading = true;

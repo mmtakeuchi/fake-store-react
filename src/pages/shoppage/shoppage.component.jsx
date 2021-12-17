@@ -9,17 +9,17 @@ const Shoppage = () => {
   const dispatch = useDispatch();
   const [loading, setLoading] = useState(true);
   const [filter, setFilter] = useState("SHOW ALL");
-  const { products } = useSelector((state) => state.products);
+  const { isLoading, products } = useSelector((state) => state.products);
   const [filteredProducts, setFilteredPRoducts] = useState();
 
-  // const renderProducts = () => {
-  //   return (
-  //     !isLoading &&
-  //     products?.map((product) => (
-  //       <ProductCard key={product.id} product={product} />
-  //     ))
-  //   );
-  // };
+  const renderProducts = () => {
+    return (
+      !isLoading &&
+      products?.map((product) => (
+        <ProductCard key={product.id} product={product} />
+      ))
+    );
+  };
 
   const renderFilteredProducts = () => {
     return filteredProducts?.map((filteredProduct) => (
@@ -49,7 +49,11 @@ const Shoppage = () => {
       {!loading && (
         <>
           <ShopNavBar setFilter={setFilter} />
-          <div className="products-container">{renderFilteredProducts()}</div>
+          <div className="products-container">
+            {filter === "SHOW ALL"
+              ? renderProducts()
+              : renderFilteredProducts()}
+          </div>
         </>
       )}
     </div>
