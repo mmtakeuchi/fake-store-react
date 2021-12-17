@@ -1,7 +1,12 @@
 import React from "react";
+import { useDispatch } from "react-redux";
+import { addToCart, removeFromCart } from "../../redux/cart/cartActions";
 import "./checkout-item.styles.scss";
 
-const CheckoutItem = ({ item: { title, image, quantity, price } }) => {
+const CheckoutItem = ({ item }) => {
+  const { title, image, quantity, price } = item;
+  const dispatch = useDispatch();
+
   return (
     <div className="checkout-item">
       <div className="checkout-item_image">
@@ -9,9 +14,9 @@ const CheckoutItem = ({ item: { title, image, quantity, price } }) => {
       </div>
       <p className="checkout-item_title">{title}</p>
       <span className="checkout-item_details">
-        <div>&#10094;</div>
+        <div onClick={() => dispatch(removeFromCart(item))}>&#10094;</div>
         <span>{quantity}</span>
-        <div>&#10095;</div>
+        <div onClick={() => dispatch(addToCart(item))}>&#10095;</div>
       </span>
       <p className="checkout-item_price">${price.toFixed(2)}</p>
       <div className="remove-item-btn">&#10005;</div>

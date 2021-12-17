@@ -1,6 +1,11 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { toggleCart, addToCart, clearCart } from "./cartActions";
-import { addItemToCart } from "./cartUtil";
+import {
+  toggleCart,
+  addToCart,
+  removeFromCart,
+  clearCart,
+} from "./cartActions";
+import { addItemToCart, removeItemInCart } from "./cartUtil";
 
 const initialState = {
   isLoading: false,
@@ -12,7 +17,9 @@ export const cartSlice = createSlice({
   name: "cart",
   initialState,
   reducers: {
+    toggleCart,
     addToCart,
+    removeFromCart,
     clearCart,
   },
   extraReducers: (builder) => {
@@ -31,6 +38,13 @@ export const cartSlice = createSlice({
       .addCase(addToCart.fulfilled, (state, { payload }) => {
         state.isLoading = false;
         state.cartItems = addItemToCart(state.cartItems, payload);
+      })
+      .addCase(removeFromCart.pending, ({ isLoading }) => {
+        isLoading = true;
+      })
+      .addCase(removeFromCart.fulfilled, (state, { payload }) => {
+        state.isLoading = false;
+        state.cartItems = removeItemInCart(state.cartItems, payload);
       })
       .addCase(clearCart.pending, ({ isLoading }) => {
         isLoading = true;
