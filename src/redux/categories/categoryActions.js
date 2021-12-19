@@ -11,7 +11,7 @@ const categoryError = (error) => {
 export const getCategories = createAsyncThunk(
   "categories/fetchCategories",
   async () => {
-    const categories = await axios
+    let categories = await axios
       .get(`${BASE_URL}/products/categories`)
       .then((response) => response.data)
       .catch((err) => {
@@ -21,9 +21,11 @@ export const getCategories = createAsyncThunk(
 
     try {
       if (categories) {
-        return categories.map((category) => {
+        categories = categories.map((category) => {
           return { id: uuidv4(), title: category };
         });
+
+        return [{ id: uuidv4(), title: "show all" }, ...categories];
       }
     } catch (error) {
       console.log("Error", error);

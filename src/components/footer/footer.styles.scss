@@ -1,9 +1,18 @@
 .footer {
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
+  align-items: center;
   margin-top: auto;
-  padding: 1em;
+  padding: 1em 3em;
 
-  &_attr {
+  a {
+    text-decoration: none;
+    color: black;
+  }
+
+  .footer-attrs a {
+    .attr {
+      color: blue;
+    }
   }
 }

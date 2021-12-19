@@ -9,9 +9,11 @@ const HomePage = () => {
   const { categories } = useSelector((state) => state.categories);
 
   const renderCategoryImages = () => {
-    return categories?.map((category) => (
-      <CollectionPreview key={category.id} category={category} />
-    ));
+    return categories
+      ?.slice(1)
+      .map((category) => (
+        <CollectionPreview key={category.id} category={category} />
+      ));
   };
 
   useEffect(() => dispatch(getCategories()), [dispatch]);

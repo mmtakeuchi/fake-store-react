@@ -19,7 +19,7 @@ const Header = () => {
         <Link to="shop" className="option">
           Shop
         </Link>
-        <p className="option">Sign In</p>
+
         <img
           src="https://img.icons8.com/external-vitaliy-gorbachev-flat-vitaly-gorbachev/58/000000/external-luggage-cart-vacation-vitaliy-gorbachev-flat-vitaly-gorbachev.png"
           alt="cart-icon"

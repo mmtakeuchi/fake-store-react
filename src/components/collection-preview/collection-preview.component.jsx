@@ -12,9 +12,9 @@ const CollectionPreview = ({ category: { image, title } }) => {
         className="collection-preview_image"
       />
       <div className="collection-preview_details">
-        <p className="collection-preview_details_title">
+        <span className="collection-preview_details_title">
           {title.toUpperCase()}
-        </p>
+        </span>
       </div>
     </div>
   );

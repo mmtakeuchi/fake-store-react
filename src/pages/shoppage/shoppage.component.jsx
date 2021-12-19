@@ -11,6 +11,7 @@ const Shoppage = () => {
   const [filter, setFilter] = useState("SHOW ALL");
   const { isLoading, products } = useSelector((state) => state.products);
   const [filteredProducts, setFilteredPRoducts] = useState();
+  console.log(filter);
 
   const renderProducts = () => {
     return (

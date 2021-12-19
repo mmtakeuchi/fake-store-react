@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef, createRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getCategories } from "../../redux/categories/categoryActions";
+import CategorySelect from "../category-select/category-select.component";
 import "./shop-navbar.styles.scss";
 
 const ShopNavBar = ({ setFilter }) => {
@@ -8,7 +9,6 @@ const ShopNavBar = ({ setFilter }) => {
   const elRefs = useRef([]);
   const [active, setActive] = useState("SHOW ALL");
   const { isLoading, categories } = useSelector((state) => state.categories);
-  console.log(categories);
 
   const handleActive = (e) => {
     const dataId = e.target.dataset.index;
@@ -46,15 +46,15 @@ const ShopNavBar = ({ setFilter }) => {
 
   return (
     <div className="shop-navbar">
-      <p
-        className={`category-filter${active === "SHOW ALL" ? "_active" : ""}`}
-        data-index={0}
-        ref={elRefs.current[0]}
-        onClick={handleActive}
-      >
-        SHOW ALL
-      </p>
-      {renderCategories()}
+      <div className="category-picks">{renderCategories()}</div>
+      <div className="category-select">
+        <CategorySelect
+          categories={categories}
+          setFilter={setFilter}
+          active={active}
+          setActive={setActive}
+        />
+      </div>
     </div>
   );
 };
