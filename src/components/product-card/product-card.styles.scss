@@ -97,3 +97,10 @@
     margin: 0.375em 0.1em;
   }
 }
+
+@media screen and (max-width: 300px) {
+  .product-card {
+    flex: 1 1 100%;
+    margin: 0.1em 0;
+  }
+}

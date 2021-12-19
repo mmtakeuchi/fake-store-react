@@ -16,7 +16,6 @@ const CategorySelect = ({ categories, active, setActive, setFilter }) => {
 
   return (
     <form className="categories-select_form">
-      {/* <label className="categories-select_form_title">Select Category </label> */}
       <select value={selection} onChange={handleSelect}>
         {categories?.map((category) => (
           <option key={category.id} value={category.title.toUpperCase()}>
