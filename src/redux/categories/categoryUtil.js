@@ -6,7 +6,7 @@ import womens from "../../assets/womens-clothing.jpg";
 const images = [electronics, jewelery, mens, womens];
 
 export const addCategoryImage = (categories) => {
-  let slices = categories.slice(1).map((category) => {
+  let slices = categories?.slice(1)?.map((category) => {
     let img = images.find((image) => {
       return (
         image.split("/")[3].split(".")[0].split("-")[0] ===

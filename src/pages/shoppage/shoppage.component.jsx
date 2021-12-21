@@ -3,15 +3,16 @@ import { useDispatch, useSelector } from "react-redux";
 import { getProducts } from "../../redux/products/productActions";
 import ShopNavBar from "../../components/shop-navbar/shop-navbar.component";
 import ProductCard from "../../components/product-card/product-card.component";
+import LoadingSpinner from "../../components/loading-spinner/loading-spinner.component";
 import "./shoppage.styles.scss";
 
 const Shoppage = () => {
   const dispatch = useDispatch();
-  const [loading, setLoading] = useState(true);
   const [filter, setFilter] = useState("SHOW ALL");
+  const state = useSelector((state) => state);
+  console.log(state);
   const { isLoading, products } = useSelector((state) => state.products);
   const [filteredProducts, setFilteredPRoducts] = useState();
-  console.log(filter);
 
   const renderProducts = () => {
     return (
@@ -30,13 +31,12 @@ const Shoppage = () => {
 
   useEffect(() => {
     dispatch(getProducts());
-    setLoading(false);
-  }, [dispatch, loading]);
+  }, [dispatch]);
 
   useEffect(() => {
     if (filter !== "SHOW ALL") {
       setFilteredPRoducts(
-        products?.filter((product) => product.category == filter.toLowerCase())
+        products?.filter((product) => product.category === filter.toLowerCase())
       );
     } else {
       setFilteredPRoducts(products);
@@ -45,7 +45,9 @@ const Shoppage = () => {
 
   return (
     <div className="shop-container">
-      {!loading && (
+      {isLoading ? (
+        <LoadingSpinner />
+      ) : (
         <>
           <ShopNavBar setFilter={setFilter} />
           <div className="products-container">

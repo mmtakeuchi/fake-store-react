@@ -3,7 +3,6 @@ import "./category-select.styles.scss";
 
 const CategorySelect = ({ categories, active, setActive, setFilter }) => {
   const [selection, setSelection] = useState(active);
-  console.log(active, selection);
 
   const handleSelect = (e) => {
     const { value } = e.target;

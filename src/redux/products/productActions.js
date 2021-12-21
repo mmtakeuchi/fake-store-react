@@ -13,7 +13,9 @@ export const getProducts = createAsyncThunk(
     try {
       const products = await axios
         .get(`${BASE_URL}/products`)
-        .then((response) => response.data)
+        .then((response) => {
+          return response.data;
+        })
         .catch((err) => {
           console.log("Error", err);
           return productsError(err);

@@ -2,11 +2,13 @@ import React, { useState, useEffect, useRef, createRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getCategories } from "../../redux/categories/categoryActions";
 import CategorySelect from "../category-select/category-select.component";
+import LoadingSpinner from "../loading-spinner/loading-spinner.component";
 import "./shop-navbar.styles.scss";
 
 const ShopNavBar = ({ setFilter }) => {
   const dispatch = useDispatch();
   const elRefs = useRef([]);
+  const [loading, setLoading] = useState(true);
   const [active, setActive] = useState("SHOW ALL");
   const { isLoading, categories } = useSelector((state) => state.categories);
 
@@ -42,19 +44,28 @@ const ShopNavBar = ({ setFilter }) => {
     );
   };
 
-  useEffect(() => dispatch(getCategories()), []);
+  useEffect(() => {
+    dispatch(getCategories());
+    setLoading(false);
+  }, [dispatch, loading]);
 
   return (
     <div className="shop-navbar">
-      <div className="category-picks">{renderCategories()}</div>
-      <div className="category-select">
-        <CategorySelect
-          categories={categories}
-          setFilter={setFilter}
-          active={active}
-          setActive={setActive}
-        />
-      </div>
+      {loading ? (
+        <LoadingSpinner />
+      ) : (
+        <>
+          <div className="category-picks">{renderCategories()}</div>
+          <div className="category-select">
+            <CategorySelect
+              categories={categories}
+              setFilter={setFilter}
+              active={active}
+              setActive={setActive}
+            />
+          </div>
+        </>
+      )}
     </div>
   );
 };

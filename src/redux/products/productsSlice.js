@@ -18,6 +18,7 @@ export const productsSlice = createSlice({
         state.isLoading = true;
       })
       .addCase(getProducts.fulfilled, (state, { payload }) => {
+        console.log(payload);
         state.isLoading = false;
         state.products = payload;
       });
