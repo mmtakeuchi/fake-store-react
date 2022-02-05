@@ -13,9 +13,10 @@
 
   &_items-container {
     height: 87.5%;
+    width: 100%;
     display: flex;
     flex-direction: column;
-    overflow: scroll;
+    overflow: auto;
   }
 
   &_empty-container {
@@ -28,5 +29,6 @@
     background: none;
     padding: 0.5em;
     width: 50%;
+    cursor: pointer;
   }
 }

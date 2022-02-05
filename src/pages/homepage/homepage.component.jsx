@@ -7,8 +7,6 @@ import "./homepage.styles.scss";
 
 const HomePage = () => {
   const dispatch = useDispatch();
-  const state = useSelector((state) => state);
-  console.log(state);
   const { isLoading, categories } = useSelector((state) => state.categories);
 
   const renderCategoryImages = () => {

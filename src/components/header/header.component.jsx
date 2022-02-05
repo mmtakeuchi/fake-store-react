@@ -17,7 +17,7 @@ const Header = () => {
       </Link>
       <div className="options-container">
         <Link to="shop" className="option">
-          Shop
+          SHOP
         </Link>
 
         <img

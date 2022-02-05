@@ -9,8 +9,6 @@ import "./shoppage.styles.scss";
 const Shoppage = () => {
   const dispatch = useDispatch();
   const [filter, setFilter] = useState("SHOW ALL");
-  const state = useSelector((state) => state);
-  console.log(state);
   const { isLoading, products } = useSelector((state) => state.products);
   const [filteredProducts, setFilteredPRoducts] = useState();
 

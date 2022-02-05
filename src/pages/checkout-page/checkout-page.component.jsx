@@ -22,6 +22,8 @@ const CheckoutPage = (props) => {
     0
   );
 
+  console.log(calculateTotal, typeof calculateTotal);
+
   const checkout = (total) => {
     alert(`Thank you for your purchase! Your total was $${total.toFixed(2)}.`);
     dispatch(clearCart());
@@ -53,7 +55,7 @@ const CheckoutPage = (props) => {
           </div>
           {renderCheckoutItems()}
           <div className="checkout-container_total">
-            TOTAL: ${calculateTotal}
+            TOTAL: ${calculateTotal.toFixed(2)}
           </div>
           <button
             className="checkout-container_btn"
